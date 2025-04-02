@@ -1,0 +1,26 @@
+*{
+    margin: 0;
+}
+body{
+    background-color: rgb(221, 221, 221);
+}
+#privet{
+    background-color: white;
+}
+.navbarcust{
+   border-bottom-right-radius: 10px;
+   border-bottom-left-radius: 10px;
+}
+.navbar{
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+section{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+.text{
+    background-color: white;
+    border-radius: 10px;
+    text-align: center;
+}
