@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Апр 02 2025 г., 09:00
+-- Время создания: Апр 02 2025 г., 09:33
 -- Версия сервера: 5.7.39
 -- Версия PHP: 8.0.22
 
@@ -50,11 +50,20 @@ INSERT INTO `personal` (`id_personal`, `loginss`, `passs`, `fio`, `age`, `role`)
 --
 
 CREATE TABLE `users` (
-  `id_user` int(255) NOT NULL,
+  `id_users` int(255) NOT NULL,
   `fio` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `logins` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `passs` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+  `login` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pass` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `role` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Дамп данных таблицы `users`
+--
+
+INSERT INTO `users` (`id_users`, `fio`, `login`, `email`, `pass`, `role`) VALUES
+(1, 'Иванов Иван Иванович', 'User', 'user@mail.ru', 'user', 'user');
 
 -- --------------------------------------------------------
 
@@ -95,7 +104,7 @@ ALTER TABLE `personal`
 -- Индексы таблицы `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id_user`);
+  ADD PRIMARY KEY (`id_users`);
 
 --
 -- Индексы таблицы `uslugi`
@@ -108,9 +117,9 @@ ALTER TABLE `uslugi`
 --
 ALTER TABLE `zapiss`
   ADD PRIMARY KEY (`id_zapisi`),
-  ADD KEY `id_user` (`id_user`),
   ADD KEY `id_uslugi` (`id_uslugi`),
-  ADD KEY `id_personal` (`id_personal`);
+  ADD KEY `id_personal` (`id_personal`),
+  ADD KEY `id_user` (`id_user`);
 
 --
 -- AUTO_INCREMENT для сохранённых таблиц
@@ -126,7 +135,7 @@ ALTER TABLE `personal`
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_user` int(255) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_users` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT для таблицы `uslugi`
@@ -148,9 +157,9 @@ ALTER TABLE `zapiss`
 -- Ограничения внешнего ключа таблицы `zapiss`
 --
 ALTER TABLE `zapiss`
-  ADD CONSTRAINT `zapiss_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`),
   ADD CONSTRAINT `zapiss_ibfk_3` FOREIGN KEY (`id_uslugi`) REFERENCES `uslugi` (`id_uslug`),
-  ADD CONSTRAINT `zapiss_ibfk_4` FOREIGN KEY (`id_personal`) REFERENCES `personal` (`id_personal`);
+  ADD CONSTRAINT `zapiss_ibfk_4` FOREIGN KEY (`id_personal`) REFERENCES `personal` (`id_personal`),
+  ADD CONSTRAINT `zapiss_ibfk_5` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_users`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
